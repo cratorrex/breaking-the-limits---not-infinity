@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <title>Breaking The Limits (Alpha)</title>
+    </head>
+    <body id="body">
+
+        <div> <!--Top Navigation-->
+            <div class="horizontal"> 
+                
+                <!--Scores-->
+                
+                <p class="container">
+                    Points: 
+                    <b id="pointScore"></b>
+                </p>/
+                <p class="container">
+                    Limits: 
+                    <b id="limitScore"></b>
+                </p>                
+            </div>
+
+            <div class="horizontal"> <!--Progress Bars (Experimental)-->
+                <div id="barLimit" class="progressBar">
+                        <div id="barLimitProgress" class="limit progress"></div>
+                </div>
+                <div id="barExtend" class="progressBar">
+                        <div id="barExtendProgress" class="extend progress"></div>
+                </div>
+            </div>
+
+            <button id="btnLimitGain" title="Exchange Points for Limit">
+                <b>Break The Limit!</b>
+            </button>
+
+            <div class="horizontal">
+
+                <!--Tab Navigation-->
+
+                <button id="btnLimitTab">
+                    Limit
+                </button>
+                <button id="btnExtendTab">
+                    Extend
+                </button>
+                <button id="btnOptionsTab">
+                    Options
+                </button>
+            </div>
+
+        </div>
+
+
+        <div> <!--Main Body. All the Layers and stuff -->
+            
+            <div id="tabLimit">
+
+            </div>
+            
+            
+            <div id="tabExtend">
+
+            </div>
+
+
+            <div id="tabOptions">
+                <button id="monospace">Toggle Monospace Font</button>
+            </div>
+
+            <div id="tabVersion">
+
+            </div>
+
+
+        </div>
+
+
+        <div class="horizontal"> <!--Bottom Navigations... Saving and Changelogs-->
+            <button id="btnSave" class="small">
+                Save
+            </button>
+
+            <button id="btnLoad" class="small">
+                Load
+            </button>
+
+            <button id="btnExport" class="small">
+                Export
+            </button>
+
+            <button id="btnImport" class="small">
+                Import
+            </button>
+
+            <button id="btnVersion" class="version small building"
+            title="Click me for the Changelog!">
+                0.0.1
+            </button>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script src="main.js" type="module"></script>
+    </body>
+</html>
