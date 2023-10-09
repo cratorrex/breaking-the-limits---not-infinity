@@ -1,6 +1,6 @@
 import { Game } from "./game.js";
 import { Texts } from "./texts.js";
-import { Constructures as Constructs } from "./constructures.js";
+import * as Constructs from "./constructures.js";
 
 
 let Displays = {};
@@ -35,13 +35,24 @@ function init() {
             Displays.BarExtendProgress = $("#barExtendProgress");
 
 
-        //Costs
+        //Structures
+        Displays.StructureContainer = $("#structures");
 
+            Displays.StructureCosts = 
+            [$("#genL1cost"), $("#genL2cost"), $("#genL3cost"),
+             $("#genL4cost"), $("#genL5cost")];
 
+            Displays.StructureGeneration = 
+            [$("#genL1gen"), $("#genL2gen"), $("#genL3gen"),
+             $("#genL4gen"), $("#genL5gen")];
 
+            Displays.StructureOwn = 
+            [$("#genL1own"), $("#genL2own"), $("#genL3own"),
+             $("#genL4own"), $("#genL5own")];
 
-        //Effects
-
+        //Upgrades
+        Displays.LimitUpgradesContainer = $("#upgradesL");
+        Displays.LimitUpgradesDescription = $("#upgradeDescriptionBox");
 
 
 
@@ -54,10 +65,12 @@ function init() {
 
 
         //Structures
-    
+            Buttons.Structures = 
+            [$("#genL1"), $("#genL2"), $("#genL3"), $("#genL4"), $("#genL5")]
     
         //Upgrades
-
+            Buttons.Upgrades =
+            [$("#upgL11")];
 
 
 
@@ -103,9 +116,62 @@ function init() {
 
 
 
+//Structure Buttons
+Buttons.Structures[0].click(function(){
+    let cost = Constructs.structuresCost(0)
+    if (game.limits.Score >= cost){
+        game.limits.Score -= cost;
+        game.structures[0] += 1;
+    }
+})
+
+Buttons.Structures[1].click(function(){
+    let cost = Constructs.structuresCost(1)
+    if (game.limits.Score >= cost){
+        game.limits.Score -= cost;
+        game.structures[1] += 1;
+    }
+})
+
+Buttons.Structures[2].click(function(){
+    let cost = Constructs.structuresCost(2)
+    if (game.limits.Score >= cost){
+        game.limits.Score -= cost;
+        game.structures[2] += 1;
+    }
+
+})
+
+Buttons.Structures[3].click(function(){
+    let cost = Constructs.structuresCost(3)
+    if (game.limits.Score >= cost){
+        game.limits.Score -= cost;
+        game.structures[3] += 1;
+    }
+
+})
+
+Buttons.Structures[4].click(function(){
+    let cost = Constructs.structuresCost(4)
+    if (game.limits.Score >= cost){
+        game.limits.Score -= cost;
+        game.structures[4] += 1;
+    }
+
+})
 
 
 
+
+
+
+
+
+//Upgrades :O
+
+Buttons.Upgrades[0].hover(function(){
+    Displays.LimitUpgradesDescription.text("Test Text");
+})
 
 
 
@@ -138,12 +204,13 @@ function init() {
 
 //Options Buttons
     Buttons.Monospace.click(function(){
-        if (game.options.monospace == true){
-            game.options.monospace = false;
-        }
-        else{
-            game.options.monospace = true;
-        }
+        game.options.monospace = !game.options.monospace;
+        // if (game.options.monospace == true){
+        //     game.options.monospace = false;
+        // }
+        // else{
+        //     game.options.monospace = true;
+        // }
         })
 
 //Saving
@@ -184,7 +251,7 @@ function init() {
 
 
 function updateGeneration(game){
-    let generation = (1)/100;
+    let generation = (1 + Constructs.structuresGen(game.structures))/100;
     game.pointScore = game.pointScore + generation;
     //game.scoreTotal = game.scoreTotal + generation;
 
@@ -207,13 +274,18 @@ function updateGeneration(game){
 
 function updateConditions(game){
     let points = game.pointScore;
-    let limits = game.limitScore;
+    let limits = game.limitScoreTotal;
 
-    condenseConditions(limits, true, Buttons.Extend);
-    condenseConditions(limits, true, Displays.BarExtend);
+    condenseConditions(false, true, Buttons.Extend);
+    condenseConditions(false, true, Displays.BarExtend);
 
+    condenseConditions(limits,   4, Displays.StructureContainer);
+    condenseConditions(limits,  24, Buttons.Structures[1]);
+    condenseConditions(limits,  84, Buttons.Structures[2]);
+    condenseConditions(limits, 224, Buttons.Structures[3]);
+    condenseConditions(limits, 794, Buttons.Structures[4]);
 
-
+    condenseConditions(false, 9, Displays.LimitUpgradesContainer);
 
 
     function condenseConditions(score, minScore, button){//button can be display
@@ -294,8 +366,21 @@ function updateData(Displays, game){ //(Displays, game)
     condenseDisplayFormat(Displays.DisplayScorePoint, game.pointScore, 5);
     condenseDisplayFormat(Displays.DisplayScoreLimit, game.limits.Score, 5);
 
-    condenseProgressBar("barLimitProgress", game.pointScore, game.limits.Score);
+    condenseArrayDisplayFormat(Displays.StructureCosts, 
+        Constructs.structuresDisplay(game.structures, "cost"), 5);
 
+    condenseArrayDisplayFormat(Displays.StructureGeneration,
+        Constructs.structuresDisplay(game.structures, "gen"), 5);
+
+    condenseArrayDisplayFormat(Displays.StructureOwn,
+        Constructs.structuresDisplay(game.structures, "own"),10);
+
+
+
+
+
+    condenseProgressBar("barLimitProgress", game.pointScore, game.limits.Score);
+    Buttons.Save.text("Save  ( " + game.frameSaveCount + " / 1000 )")
 
     function condenseDisplayFormat(display, score, precision){
         if(score >= 1e10){
@@ -311,8 +396,15 @@ function updateData(Displays, game){ //(Displays, game)
                 if (score2 == 0) { width = 100; }
 
         document.getElementById(display).innerText = Math.floor(width*100)/100 + "%";
-        document.getElementById(display).style.width = width*0.95 + "%";
+        document.getElementById(display).style.width = width*0.96 + "%";
     }
+
+    function condenseArrayDisplayFormat(display, score, precision){
+        for(let i=0; i<display.length; i++){
+            condenseDisplayFormat(display[i], score[i], precision);
+        }
+    }
+
 
 
     if (game.options.monospace == true){

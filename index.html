@@ -7,12 +7,12 @@
     </head>
     <body id="body">
 
-        <div> <!--Top Navigation-->
-            <div class="horizontal"> 
+        <!--div class=""--> <!--Top Navigation-->
+            <div class="horizontal top"> 
                 
                 <!--Scores-->
                 
-                <p class="container">
+                <p class="container ">
                     Points: 
                     <b id="pointScore"></b>
                 </p>/
@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <button id="btnLimitGain" title="Exchange Points for Limit">
+            <button id="btnLimitGain" title="Exchange Points for Limit.">
                 <b>Break The Limit!</b>
             </button>
 
@@ -50,13 +50,67 @@
                 </button>
             </div>
 
-        </div>
+        <!--/div-->
 
 
-        <div> <!--Main Body. All the Layers and stuff -->
+        <div class="body"> <!--Main Body. All the Layers and stuff -->
             
             <div id="tabLimit">
+                <div id="structures" class="container"> <!--Structures-->
+                    <p class="nomargin"><b>Structures</b> cost Limits</p>
+                    <div class="horizontal">   
+                        
+                        <button id="genL1">
+                            <p><b>Another Point</b></p>
+                            <p>Generates <b>1</b> more point per second.<br/>
+                            <br/>Gen: <b id="genL1gen">0</b><br/>
+                            Cost: <b id="genL1cost">0</b><br/>
+                            Owned: <b id="genL1own">0</b></p>
+                        </button>
 
+                        <button id="genL2">
+                            <p><b>A Line</b></p>
+                            <p>Generates <b>5</b> points per second.<br/>
+                            <br/>Gen: <b id="genL2gen">0</b><br/>
+                            Cost: <b id="genL2cost">0</b><br/>
+                            Owned: <b id="genL2own">0</b></p>
+                        </button>
+
+                        <button id="genL3">
+                            <p><b>A Circle</b></p>
+                            <p>Generates <b>25</b> points per second.<br/>
+                            <br/>Gen: <b id="genL3gen">0</b><br/>
+                            Cost: <b id="genL3cost">0</b><br/>
+                            Owned: <b id="genL3own">0</b></p>
+                        </button>
+
+                        <button id="genL4">
+                            <p><b>A Limit Breaker</b></p>
+                            <p>Generates <b>125</b> points per second. Woah!<br/>
+                            <br/>Gen: <b id="genL4gen">0</b><br/>
+                            Cost: <b id="genL4cost">0</b><br/>
+                            Owned: <b id="genL4own">0</b></p>
+                        </button>
+
+                        <button id="genL5">
+                            <p><b>An Extra Leg?</b></p>
+                            <p>Generates <b>750</b> points per second.<br/>
+                            <br/>Gen: <b id="genL5gen">0</b><br/>
+                            Cost: <b id="genL5cost">0</b><br/>
+                            Owned: <b id="genL5own">0</b></p>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div id="upgradesL" class="horizontal container"> <!--Upgrades-->
+                    <div>
+                        <button id="upgL11" class="mini">L11</button>
+                    </div>
+                    <div id="upgradeDescriptionBox" class="container">
+
+                    </div>
+                </div>
             </div>
             
             
@@ -77,7 +131,7 @@
         </div>
 
 
-        <div class="horizontal"> <!--Bottom Navigations... Saving and Changelogs-->
+        <div class="horizontal bottom"> <!--Bottom Navigations... Saving and Changelogs-->
             <button id="btnSave" class="small">
                 Save
             </button>
@@ -96,7 +150,7 @@
 
             <button id="btnVersion" class="version small building"
             title="Click me for the Changelog!">
-                0.0.1
+                0.0.2
             </button>
         </div>
 

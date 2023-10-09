@@ -1,6 +1,6 @@
 export class Game {
     constructor() {
-        this.version = "0.0.1";
+        this.version = "0.0.2";
 
         //this.gameFrame = 0;
         this.frameCount = 0;
@@ -19,7 +19,8 @@ export class Game {
             Gain: 1,
         };
 
-
+        this.structures = [0,0,0,0,0,0];
+        
 
 
 
