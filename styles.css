@@ -25,14 +25,14 @@ div {
         width:95%;
 
 }
-div.changelog{
+.changelog{
     border: 3px solid #aaaaaa;
     border-radius: 15px;
     padding: 25px;
     width: 100%;
     text-align: center;
 }
-div.horizontal {
+.horizontal {
     flex-direction: row;
 }
 div.progress {    
@@ -41,10 +41,10 @@ div.progress {
     padding: 5px;
     
 }    
-div.limit{
+.limit{
         background-color: #108040;
     }
-div.extend{
+.extend{
         background-color: #808010;
     }
 
@@ -67,7 +67,7 @@ div.container{
         overflow-x: auto;
 
 }
-div.top{
+.top{
     background-color: #101530;
     position: sticky;
     top: 0px;
@@ -75,12 +75,12 @@ div.top{
     border-bottom: 3px solid #102040;
     border-radius: 15px;
 }
-div.body{
+.body{
     /*padding-top: 250px;*/
     padding-bottom: 80px;
     height: 70%;
 }
-div.bottom{
+.bottom{
     background-color: #101530;
     position: fixed;
     bottom: -15px;
