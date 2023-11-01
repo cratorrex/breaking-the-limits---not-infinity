@@ -37,7 +37,7 @@ dispDesc.html("<p>Structures function better when clumped up together.</p>" +
 
         case 4:
 dispTitle.text("LL3: Break the Limits a bit more...")
-dispDesc.html("<br/><p><strong>Gain 1 more Limit per Limit Break.</strong><p>")
+dispDesc.html("<br/><p><strong>Gain more Limits per Limit Break.</strong><p>")
         break;
 
         default:
@@ -83,7 +83,7 @@ dispDesc.html("<p>Save some more effort, buy some colour combinations!<br/>" +
         case 4:
 dispTitle.text("S51: BREAK IN CASE OF EMERGENCY.")
 dispDesc.html("<p>Increases Limit Breaker's Speed by +100% per level.<br/>" +
-"Cost scaling goes <b>0.1</b> slower.<br/>" +
+"Cost scaling goes <b>0.125</b> slower.<br/>" +
 "Final Level unlocks something in v0.0.5...</p>")
         break;
 

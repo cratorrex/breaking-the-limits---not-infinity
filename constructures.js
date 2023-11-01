@@ -34,7 +34,7 @@ export function structuresDisplay(own, mode){
       structCost[1] = 20   + Math.floor(own[1]**1.2 * 4)      ;//1275, 7875
       structCost[2] = 50   + Math.floor(own[2]**1.3 * 16)     ;//~125250~
       structCost[3] = 125  + Math.floor(own[3]**(1.4 - upgEffectStruct[3]/(27*40)) * 64)     ;//45150
-      structCost[4] = 300  + Math.floor(own[4]**(1.5 - upgEffectStruct[4]/10) * 256)    ;
+      structCost[4] = 300  + Math.floor(own[4]**(1.5 - upgEffectStruct[4]/8) * 256)    ;
 
 
       return structCost;
@@ -115,7 +115,7 @@ export function upgradesLimits(levels){ //Uses QL1[]
     //LL3
     //Does something to your limit gain...
 
-  upgEffectLimits[4] = 1 + levels[4]
+  upgEffectLimits[4] = (1 + levels[4])**2
 
 }
 
