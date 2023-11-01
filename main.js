@@ -437,7 +437,7 @@ function updateConditions(game){
     //Upgrades
     condenseConditions(false, true, Buttons.UpgradesInfo[0]);
         //SL1
-    condenseConditions(gen[0], 0, Displays.TabControlLimit);
+    condenseConditions(limits, 10, Displays.TabControlLimit);
     condenseConditions(gen[1], 0, Buttons.UpgradesStructures[1]);
     condenseConditions(gen[2], 0, Buttons.UpgradesStructures[2]);
     condenseConditions(gen[3], 0, Buttons.UpgradesStructures[3]);
