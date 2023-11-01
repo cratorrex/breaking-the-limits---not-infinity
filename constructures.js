@@ -22,7 +22,7 @@ export function structuresGen(own) {
   generation[4] = (own[4] ) * (750 * upgEffectStruct[4]);
 //value += Owned  * Base * Upgrades >>...
   value = generation.reduce((a, b) => a + b, 0) * upgEffectLimits[2] *
-          Math.max(1,upgEffectLimits[3]);
+          Math.max(1,upgEffectLimits[3]) + 1;
 
   return value;
 }
