@@ -117,7 +117,7 @@ dispDesc.html(id);
         let changelog003 =
 "<hr/><div class=\"changelog\"><p><strong>Version 0.0.3</strong> Upgrades.</p>" +
 "<p title=\"You do not want to know how hard it was to get the actual " +
-"frameworks done... But thanks, Alvar and Rak.\">" +
+"frameworks done... But thanks, Alvar and Rak.\"><strong></strong>" +
 "Added 10 Upgrades. 5 for Structures, 2 Quality of Life, 3 Limit Layer.</p>" +
 "<p>Sub tabs now exist. Thanks UI problems.</p>" + 
 "<p>Adjusted Structure names, and Limit Breaker's cost. (now it costs " +
