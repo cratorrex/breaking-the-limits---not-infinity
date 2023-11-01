@@ -175,7 +175,7 @@ for (let i = 0; i < game.upgradesSL1.length; i++) {
 
     Buttons.UpgradesStructures[i].click(function(){
         let Cost = Constructs.upgradesDisplay("SL1 C", i);
-        if (game.structures[i] >= Cost){
+        if (game.structures[i] >= Cost && game.upgradesSL1[i] < 5){
             game.structures[i] -= Cost;
             game.upgradesSL1[i] += 1;
         }
