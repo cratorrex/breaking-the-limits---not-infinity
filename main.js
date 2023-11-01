@@ -1,10 +1,13 @@
 import { Game } from "./game.js";
 import { Texts } from "./texts.js";
 import * as Constructs from "./constructures.js";
+import "./mousetrap.js";
 
 
 let Displays = {};
 let Buttons = {};
+
+let hover = false;
 
 $(document).ready(function() {
     console.log("Debug message");
@@ -22,9 +25,12 @@ function init() {
     //Displays
     Displays.Body = $("#body");
 
+    Displays.Statistics = $("#statistics");
+
         //Scores
             Displays.DisplayScorePoint = $("#pointScore");
             Displays.DisplayScoreLimit = $("#limitScore");
+            Displays.DisplayProductionPoint = $("#productionPoint");
 
 
         //Progress Bars
@@ -51,8 +57,12 @@ function init() {
              $("#genL4own"), $("#genL5own")];
 
         //Upgrades
-        Displays.LimitUpgradesContainer = $("#upgradesL");
-        Displays.LimitUpgradesDescription = $("#upgradeDescriptionBox");
+        Displays.LimitUpgradesContainer   = $("#upgradesL");
+        Displays.LimitUpgradesTitle       = $("#upgradeTitle");
+        Displays.LimitUpgradesDescription = $("#upgradeDescription");
+        Displays.LimitUpgradesCost     = $("#upgradeCost");
+        Displays.LimitUpgradesLevel    = $("#upgradeLevel");
+        Displays.LimitUpgradesEffect   = $("#upgradeEffect");
 
 
 
@@ -66,11 +76,15 @@ function init() {
 
         //Structures
             Buttons.Structures = 
-            [$("#genL1"), $("#genL2"), $("#genL3"), $("#genL4"), $("#genL5")]
+            [$("#genL1"), $("#genL2"), $("#genL3"), $("#genL4"), $("#genL5")];
     
         //Upgrades
-            Buttons.Upgrades =
-            [$("#upgL11")];
+            Buttons.UpgradesStructures =
+            [$("#upgS11"), $("#upgS21"), $("#upgS31"), $("#upgS41"), $("#upgS51")];
+            Buttons.UpgradesLimits =
+            [$("#upgMQ1"), $("#upgMQ2"), $("#upgLL1"), $("#upgLL2"), $("#upgLL3")];
+            Buttons.UpgradesInfo = 
+            [$("upgIF")];
 
 
 
@@ -83,10 +97,15 @@ function init() {
 
         //Options
             Buttons.Monospace = $("#monospace");
+            Buttons.SideStats = $("#sidestats");
 
 
     //Tabs
         Displays.TabLimit   = $("#tabLimit");
+            Displays.TabControlLimit =$("#tabControlLimit");
+            Displays.TabStructures = $("#tabStructures");
+            Displays.TabUpgrades   = $("#tabUpgrades");
+
         Displays.TabExtend  = $("#tabExtend");
 
         Displays.TabOptions = $("#tabOptions");
@@ -94,6 +113,9 @@ function init() {
 
 
         Buttons.Limit   = $("#btnLimitTab");
+            Buttons.btnStructures = $("#btnStructuresTab");
+            Buttons.btnUpgrades   = $("#btnUpgradesTab");
+
         Buttons.Extend  = $("#btnExtendTab");
 
         Buttons.Options = $("#btnOptionsTab");
@@ -103,11 +125,7 @@ function init() {
 //Click Functions go here. :D
 
     Buttons.GainLimit.click(function(){
-        if (game.pointScore >= game.limits.Score){
-            game.limits.Score += game.limits.Gain;
-            game.limitScoreTotal += game.limits.Gain;
-            game.pointScore = 0;
-        }
+        simClick()
     });
 
 
@@ -117,48 +135,15 @@ function init() {
 
 
 //Structure Buttons
-Buttons.Structures[0].click(function(){
-    let cost = Constructs.structuresCost(0)
-    if (game.limits.Score >= cost){
-        game.limits.Score -= cost;
-        game.structures[0] += 1;
-    }
-})
-
-Buttons.Structures[1].click(function(){
-    let cost = Constructs.structuresCost(1)
-    if (game.limits.Score >= cost){
-        game.limits.Score -= cost;
-        game.structures[1] += 1;
-    }
-})
-
-Buttons.Structures[2].click(function(){
-    let cost = Constructs.structuresCost(2)
-    if (game.limits.Score >= cost){
-        game.limits.Score -= cost;
-        game.structures[2] += 1;
-    }
-
-})
-
-Buttons.Structures[3].click(function(){
-    let cost = Constructs.structuresCost(3)
-    if (game.limits.Score >= cost){
-        game.limits.Score -= cost;
-        game.structures[3] += 1;
-    }
-
-})
-
-Buttons.Structures[4].click(function(){
-    let cost = Constructs.structuresCost(4)
-    if (game.limits.Score >= cost){
-        game.limits.Score -= cost;
-        game.structures[4] += 1;
-    }
-
-})
+for (let i = 0; i < game.structures.length-1; i++) {
+    Buttons.Structures[i].click(function() {
+        let Cost = Constructs.structuresCost(i)
+        if (game.limits.Score >= Cost) {
+            game.limits.Score -= Cost;
+            game.structures[i] += 1;
+        }
+    });
+}
 
 
 
@@ -169,9 +154,142 @@ Buttons.Structures[4].click(function(){
 
 //Upgrades :O
 
-Buttons.Upgrades[0].hover(function(){
-    Displays.LimitUpgradesDescription.text("Test Text");
-})
+for (let i = 0; i < game.upgradesSL1.length; i++) {
+    Buttons.UpgradesStructures[i].hover(function() {
+        let CostNEffect = 
+            Constructs.upgradesDisplay("SL1 CE", i);
+        texts.upgradeDescStructures(i, Displays.LimitUpgradesTitle, 
+            Displays.LimitUpgradesDescription);    
+        
+        if(game.upgradesSL1[i] < 5){
+            Displays.LimitUpgradesCost.text(CostNEffect[0] + " Structure " + (i+1));
+        }
+        else{//if (that upgrade's level is 5)
+            Displays.LimitUpgradesCost.text("Maximum");
+        }
+        
+        Displays.LimitUpgradesLevel.text(game.upgradesSL1[i] + " / 5");
+        Displays.LimitUpgradesEffect.text(CostNEffect[1])
+            
+    });
+
+    Buttons.UpgradesStructures[i].click(function(){
+        let Cost = Constructs.upgradesDisplay("SL1 C", i);
+        if (game.structures[i] >= Cost){
+            game.structures[i] -= Cost;
+            game.upgradesSL1[i] += 1;
+        }
+
+    });
+
+}
+for (let i = 0; i < game.upgradesQL1.length; i++){
+        
+        switch(i){
+
+        case 0:    
+
+        Buttons.UpgradesLimits[i].hover(function(){
+            let CostNEffect = 
+                Constructs.upgradesDisplay("QL1 CE", i);
+            texts.upgradeDescLimits(i, Displays.LimitUpgradesTitle, 
+                Displays.LimitUpgradesDescription);    
+        
+            if(game.upgradesQL1[i] < 10){
+                Displays.LimitUpgradesCost.text(CostNEffect[0] + " Points");
+            }
+            else{//if (that upgrade's level is 10)
+                Displays.LimitUpgradesCost.text("Maximum");
+            }
+
+            Displays.LimitUpgradesLevel.text(game.upgradesQL1[i] + " / 10");
+            Displays.LimitUpgradesEffect.text(Math.floor(CostNEffect[1]) +" frames")
+    
+        })
+
+        Buttons.UpgradesLimits[i].click(function(){
+            let Cost = Constructs.upgradesDisplay("QL1 C", i);
+            if (game.pointScore >= Cost && game.upgradesQL1[i] < 10){
+                game.pointScore -= Cost;
+                game.upgradesQL1[i] += 1;
+            }
+    
+        });
+    
+
+        break;
+        
+        case 1:
+
+        Buttons.UpgradesLimits[i].hover(function(){
+            let CostNEffect = 
+                Constructs.upgradesDisplay("QL1 CE", i);
+            texts.upgradeDescLimits(i, Displays.LimitUpgradesTitle, 
+                Displays.LimitUpgradesDescription);    
+        
+            if(game.upgradesQL1[i] < 1){
+                Displays.LimitUpgradesCost.text(CostNEffect[0] + " Points");
+            }
+            else{//if (that upgrade's level is 1)
+                Displays.LimitUpgradesCost.text("Maximum");
+            }
+
+            Displays.LimitUpgradesLevel.text(game.upgradesQL1[i] + " / 1");
+            Displays.LimitUpgradesEffect.text(Math.floor(CostNEffect[1]))
+
+
+        })
+
+        Buttons.UpgradesLimits[i].click(function(){
+            let Cost = Constructs.upgradesDisplay("QL1 C", i);
+            if (game.pointScore >= Cost && game.upgradesQL1[i] < 1){
+                game.pointScore -= Cost;
+                game.upgradesQL1[i] += 1;
+            }
+        });
+
+        break;
+
+        case 2: case 3: case 4:
+
+        Buttons.UpgradesLimits[i].hover(function(){
+            let CostNEffect = 
+                Constructs.upgradesDisplay("QL1 CE", i);
+            texts.upgradeDescLimits(i, Displays.LimitUpgradesTitle, 
+                Displays.LimitUpgradesDescription);    
+
+            if(game.upgradesQL1[i] < 5){
+                Displays.LimitUpgradesCost.text(CostNEffect[0] + " Limits");
+            }
+            else{//if (that upgrade's level is 5)
+                Displays.LimitUpgradesCost.text("Maximum");
+            }
+
+            Displays.LimitUpgradesLevel.text(game.upgradesQL1[i] + " / 5");
+            Displays.LimitUpgradesEffect.text(Math.floor(CostNEffect[1]))
+
+
+        })
+
+        Buttons.UpgradesLimits[i].click(function(){
+            let Cost = Constructs.upgradesDisplay("QL1 C", i);
+            if (game.limits.Score >= Cost && game.upgradesQL1[i] < 5){
+                game.limits.Score -= Cost;
+                game.upgradesQL1[i] += 1;
+            }
+            game.limits.Gain = game.upgradesQL1[4] + 1;
+        });
+
+
+
+        break;
+            
+        }
+}
+
+// Buttons.UpgradesStructures[0].hover(function(){
+//     Displays.LimitUpgradesDescription.text("Test Text");
+// })
 
 
 
@@ -183,26 +301,35 @@ Buttons.Upgrades[0].hover(function(){
 
 //Tab Buttons
     Buttons.Limit.click(function(){
-        game.options.tabIndex = 0;
+        game.options.tabIndex[0] = 0;
 
     });
+            Buttons.btnStructures.click(function(){
+                game.options.tabIndex[1] = 0
+            });
+            Buttons.btnUpgrades.click(function(){
+                game.options.tabIndex[1] = 1
+            });
+
     Buttons.Extend.click(function(){
-        game.options.tabIndex = 1;
+        game.options.tabIndex[0] = 1;
 
     });
 
     Buttons.Options.click(function(){
-        game.options.tabIndex = 8;
+        game.options.tabIndex[0] = 8;
 
     })
     Buttons.Version.click(function(){
-        game.options.tabIndex = 9;
+        game.options.tabIndex[0] = 9;
 
     })
 
 
 
-//Options Buttons
+
+
+//Options Buttons and Misc.
     Buttons.Monospace.click(function(){
         game.options.monospace = !game.options.monospace;
         // if (game.options.monospace == true){
@@ -212,6 +339,16 @@ Buttons.Upgrades[0].hover(function(){
         //     game.options.monospace = true;
         // }
         })
+    Buttons.SideStats.click(function(){
+        game.options.sidestats = !game.options.sidestats;
+    })
+
+    Displays.DisplayProductionPoint.hover(function(){
+        hover = !hover;
+    })
+
+
+
 
 //Saving
         Buttons.Save.click(function() {
@@ -242,6 +379,13 @@ Buttons.Upgrades[0].hover(function(){
 
 }
 
+function simClick(){
+    if (game.pointScore >= game.limits.Score){
+            game.limits.Score += game.limits.Gain;
+            game.limitScoreTotal += game.limits.Gain;
+            game.pointScore = 0;
+        }
+}
 
 
 
@@ -275,17 +419,36 @@ function updateGeneration(game){
 function updateConditions(game){
     let points = game.pointScore;
     let limits = game.limitScoreTotal;
+    let gen    = game.structures;
 
     condenseConditions(false, true, Buttons.Extend);
     condenseConditions(false, true, Displays.BarExtend);
+    condenseConditions(false, true, Buttons.SideStats);
+    
 
+    //Structures
     condenseConditions(limits,   4, Displays.StructureContainer);
     condenseConditions(limits,  24, Buttons.Structures[1]);
     condenseConditions(limits,  84, Buttons.Structures[2]);
     condenseConditions(limits, 224, Buttons.Structures[3]);
     condenseConditions(limits, 794, Buttons.Structures[4]);
 
-    condenseConditions(false, 9, Displays.LimitUpgradesContainer);
+
+    //Upgrades
+    condenseConditions(false, true, Buttons.UpgradesInfo[0]);
+        //SL1
+    condenseConditions(gen[0], 0, Displays.TabControlLimit);
+    condenseConditions(gen[1], 0, Buttons.UpgradesStructures[1]);
+    condenseConditions(gen[2], 0, Buttons.UpgradesStructures[2]);
+    condenseConditions(gen[3], 0, Buttons.UpgradesStructures[3]);
+    condenseConditions(gen[4], 0, Buttons.UpgradesStructures[4]);
+        //QL1
+    condenseConditions(game.frameCount, 1e5, Buttons.UpgradesLimits[0]);
+    condenseConditions(game.upgradesQL1[2], 0, Buttons.UpgradesLimits[1]);
+    condenseConditions(gen[1], 0, Buttons.UpgradesLimits[2]);
+    condenseConditions(limits, 120, Buttons.UpgradesLimits[3]);
+    condenseConditions(game.upgradesQL1[3], 0, Buttons.UpgradesLimits[4]);
+
 
 
     function condenseConditions(score, minScore, button){//button can be display
@@ -304,7 +467,7 @@ function updateConditions(game){
 
 
 //Tab Stuff
-    switch(game.options.tabIndex){
+    switch(game.options.tabIndex[0]){
         case 0: //limit
             Displays.TabLimit.show();
             Buttons.Limit.addClass("inTab");
@@ -357,14 +520,78 @@ function updateConditions(game){
 
     }
 
+    switch(game.options.tabIndex[1]){
+        case 0:
+            Displays.TabStructures.show();
+            Buttons.btnStructures.addClass("inTab");
+            Displays.TabUpgrades.hide();
+            Buttons.btnUpgrades.removeClass("inTab");
+
+            break;
+        case 1:
+            Displays.TabStructures.hide();
+            Buttons.btnStructures.removeClass("inTab");
+            Displays.TabUpgrades.show();
+            Buttons.btnUpgrades.addClass("inTab");
+
+            break;
+        case 2: 
+            Displays.TabStructures.hide();
+            Buttons.btnStructures.removeClass("inTab");
+            Displays.TabUpgrades.hide();
+            Buttons.btnUpgrades.removeClass("inTab");
+
+            break;
+        default:
+            Displays.TabStructures.show();
+            Buttons.btnStructures.addClass("inTab");
+            Displays.TabUpgrades.hide();
+            Buttons.btnUpgrades.removeClass("inTab");
+
+            break;
+
+
+    }
+
+
+
+
+
+
+
+
 }
 
 
 function updateData(Displays, game){ //(Displays, game)
+    let QL1Val = Constructs.upgradesDisplay("QL1 CE", 0)
+    if(game.upgradesQL1[0] > 0 && 
+        game.frameCount % Math.floor(QL1Val[1]) == 0){
+            simClick();
+            //console.log("hover")
+    }
+    if(game.upgradesQL1[1] >= 1){
+        //if "W" keydown
+            //simClick();
+        Mousetrap.bind('w', simClick);
+    }
+
+
     updateGeneration(game);
 
     condenseDisplayFormat(Displays.DisplayScorePoint, game.pointScore, 5);
     condenseDisplayFormat(Displays.DisplayScoreLimit, game.limits.Score, 5);
+    
+    if(hover==false){
+    condenseAppend(Displays.DisplayProductionPoint,
+        condenseDisplayFormatOut( 
+        Constructs.structuresGen(game.structures), 5), " Points/s")
+    }else if(hover==true){
+    condenseAppend(Displays.DisplayProductionPoint, 
+        condenseDisplayFormatOut(
+        (Constructs.structuresGen(game.structures)/game.limits.Score), 5)
+        , " Limits/s")
+    }
 
     condenseArrayDisplayFormat(Displays.StructureCosts, 
         Constructs.structuresDisplay(game.structures, "cost"), 5);
@@ -375,27 +602,41 @@ function updateData(Displays, game){ //(Displays, game)
     condenseArrayDisplayFormat(Displays.StructureOwn,
         Constructs.structuresDisplay(game.structures, "own"),10);
 
+    Constructs.upgradesStructs(game.upgradesSL1);
+    Constructs.upgradesLimits(game.upgradesQL1);
 
 
 
 
     condenseProgressBar("barLimitProgress", game.pointScore, game.limits.Score);
-    Buttons.Save.text("Save  ( " + game.frameSaveCount + " / 1000 )")
+    Buttons.Save.text("Save  ( " + game.frameSaveCount.toString().padStart(3, '0') + " / 1000 )")
 
     function condenseDisplayFormat(display, score, precision){
         if(score >= 1e10){
             display.text(Math.floor(score.toExponential(precision)).toLocaleString("en-US"));
         }
         else{
-            display.text(score.toLocaleString("en-US"));
+            display.text(score.toFixed(2).toLocaleString("en-US"));
         }
+    }
+    function condenseDisplayFormatOut(score, precision){
+        if(score >= 1e10){
+            return Math.floor(score.toExponential(precision)).toLocaleString("en-US");
+        }
+        else{
+            return score.toFixed(2).toLocaleString("en-US");
+        }
+    }
+
+    function condenseAppend(display, value, text){
+        display.text(value + text);
     }
 
     function condenseProgressBar(display, score1, score2){
         let width = ((score1 / score2) * 100);
                 if (score2 == 0) { width = 100; }
 
-        document.getElementById(display).innerText = Math.floor(width*100)/100 + "%";
+        document.getElementById(display).innerText = (Math.floor(width*100)/100).toFixed(2) + "%";
         document.getElementById(display).style.width = width*0.96 + "%";
     }
 
@@ -410,6 +651,10 @@ function updateData(Displays, game){ //(Displays, game)
     if (game.options.monospace == true){
             Displays.Body.addClass("monospace");
     }else { Displays.Body.removeClass("monospace"); }
+
+    if (game.options.sidestats == true){
+            Displays.Statistics.show();
+    }else { Displays.Statistics.hide(); }
 }
 
 

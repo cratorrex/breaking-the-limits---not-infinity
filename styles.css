@@ -41,12 +41,12 @@ div.progress {
     padding: 5px;
     
 }    
-.limit{
+div.limit{
         background-color: #108040;
-    }
-.extend{
+}
+div.extend{
         background-color: #808010;
-    }
+}
 
 div.progressBar{    
     width: 250px;
@@ -80,6 +80,30 @@ div.container{
     padding-bottom: 80px;
     height: 70%;
 }
+.sideleft{
+    position: fixed;
+    left: 0px;
+    width: 20%;
+    float: left;
+    opacity: 0.4;
+    background-color: #1e1e1e;
+    border-right: 5px solid #004aaa;
+    border-radius: 20px;
+
+    padding: 5px;
+}
+.sideright{
+    position: fixed;
+    right: 0px;
+    width: 30%;
+    float: right;
+    opacity: 0.7;
+    background-color: #1e1e1e;
+    border-left: 5px solid #004aaa;
+    border-radius: 20px;
+
+    padding: 20px;
+}
 .bottom{
     background-color: #101530;
     position: fixed;
@@ -111,12 +135,19 @@ p.container{
     margin: 0px;
 }
 .hfix{
-    height: 200px;
-    overflow-y: auto;
+    height: 250px;
+    overflow-y: scroll;
     display: inline-block;
+    resize: vertical;
+}
+.contained{
+    width: 90%
 }
 .left{
     justify-content: left;
+}
+.center{
+    justify-content: center;
 }
 
 
@@ -161,8 +192,19 @@ button.mini{
     width: 50px;
     height: 50px;
 }
+button.bought{
+    background-color: #004aaa;
+}
 button.inTab{
-    background-color: #101530;
+    background-color: #102540;
+    border-color: #cccccc;
+}
+button.limit.inTab{
+    border-color: #10c060;
+}
+
+button.extend.inTab{
+        border-color: #c0c010;
 }
 #tabControlLimit button.inTab{
     background-color: #102015;
@@ -182,5 +224,25 @@ button.version{
 
 
 
+.sizemin{
+    display: none;
+}
 
 
+@media only screen and (max-width: 1200px) {
+    .container.horizontal, #tabStructures .horizontal {
+        flex-direction: column;
+    }
+  }
+@media only screen and (max-width: 550px) and (orientation: portrait) {
+    .sizemin{
+        display: flex;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        margin-bottom: 15%;
+        background-color: #102020;
+        opacity: 0.8;
+    }
+    
+  }

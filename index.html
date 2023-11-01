@@ -7,8 +7,8 @@
     </head>
     <body id="body">
 
-        <!--div class=""--> <!--Top Navigation-->
-            <div class="horizontal top"> 
+        <!--Top Navigation-->
+            <div class="horizontal top nomargin"> 
                 
                 <!--Scores-->
                 
@@ -35,11 +35,12 @@
                 <b>Break The Limit!</b>
             </button>
 
-            <div class="horizontal">
+
+            <div class="horizontal nomargin">
 
                 <!--Tab Navigation-->
 
-                <button id="btnLimitTab">
+                <button id="btnLimitTab" class="limit">
                     Limit
                 </button>
                 <button id="btnExtendTab">
@@ -50,14 +51,22 @@
                 </button>
             </div>
 
-        <!--/div-->
 
 
-        <div class="body"> <!--Main Body. All the Layers and stuff -->
+        <div class="body nomargin"> <!--Main Body. All the Layers and stuff -->
             
             <div id="tabLimit">
-                <div id="structures" class="container"> <!--Structures-->
-                    <p class="nomargin"><b>Structures</b> cost Limits</p>
+                <div id="tabControlLimit" class="horizontal">
+                    <button id="btnStructuresTab">Structures</button>
+                    <button id="btnUpgradesTab">Upgrades</button>
+                </div>
+
+
+                <div id="tabStructures" class="container"> <!--Structures-->
+                    <p class="nomargin"><b>Structures</b> cost Limits 
+                        <button title="Hover: Limits/s" id="productionPoint" 
+                        class="center horizontal"><p></p></button>
+                    </p>
                     <div class="horizontal">   
                         
                         <button id="genL1">
@@ -85,15 +94,15 @@
                         </button>
 
                         <button id="genL4">
-                            <p><b>A Limit Breaker</b></p>
-                            <p>Generates <b>125</b> points per second. Woah!<br/>
+                            <p><b>A Plane</b></p>
+                            <p>Generates <b>125</b> points per second. Woosh!<br/>
                             <br/>Gen: <b id="genL4gen">0</b><br/>
                             Cost: <b id="genL4cost">0</b><br/>
                             Owned: <b id="genL4own">0</b></p>
                         </button>
 
                         <button id="genL5">
-                            <p><b>An Extra Leg?</b></p>
+                            <p><b>A Limit Breaker</b></p>
                             <p>Generates <b>750</b> points per second.<br/>
                             <br/>Gen: <b id="genL5gen">0</b><br/>
                             Cost: <b id="genL5cost">0</b><br/>
@@ -103,12 +112,41 @@
                     </div>
                 </div>
 
-                <div id="upgradesL" class="horizontal container"> <!--Upgrades-->
-                    <div>
-                        <button id="upgL11" class="mini">L11</button>
-                    </div>
-                    <div id="upgradeDescriptionBox" class="container">
+                <div id="tabUpgrades" class="container"> <!--Upgrades-->
+                    <p><b>Upgrades</b> can cost anything, so look out!</p>
 
+                    <div id="upgradesL" class="horizontal contained container"> <!--Limits-->
+                        <div>
+                            <div class="left horizontal nomargin">
+                                
+                                <button id="upgIF" class="mini">i</button>
+                            </div>
+                            <div class="left horizontal nomargin">
+                                <button id="upgS11" class="mini">S11</button>
+                                <button id="upgS21" class="mini">S21</button>
+                                <button id="upgS31" class="mini">S31</button>
+                                <button id="upgS41" class="mini">S41</button>
+                                <button id="upgS51" class="mini">S51</button>
+                            </div>
+                            <div class="left horizontal nomargin">
+                                <button id="upgMQ1" class="mini">MQ1</button>
+                                <button id="upgMQ2" class="mini">MQ2</button>
+                                <button id="upgLL1" class="mini">LL1</button>
+                                <button id="upgLL2" class="mini">LL2</button>
+                                <button id="upgLL3" class="mini">LL3</button>
+                            </div>
+                            <!--div class="left horizontal nomargin">
+                                <button>Placeholder</button>
+                            </div-->
+                        </div>
+                        <div class="container hfix">
+                            <p><strong id="upgradeTitle">Upgrade Title</strong><br/><br/></p>
+                            <p id="upgradeDescription">Upgrade Description</p>
+                            <p><br/><strong>Cost:&nbsp;<b id="upgradeCost">???</b></strong>
+                            <strong>Level:&nbsp;<b id="upgradeLevel">???</b></strong></p><br/>
+                            <p><strong>Effect:&nbsp;<b id="upgradeEffect">???</b></strong></p>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,6 +159,7 @@
 
             <div id="tabOptions">
                 <button id="monospace">Toggle Monospace Font</button>
+                <button id="sidestats">Toggle Stats Overlay</button>
             </div>
 
             <div id="tabVersion">
@@ -130,6 +169,9 @@
 
         </div>
 
+            <div id="statistics" class="sideright">
+                Hello! If you see me like this on your screen for too long, that means some thing wrong happened...
+            </div>
 
         <div class="horizontal bottom"> <!--Bottom Navigations... Saving and Changelogs-->
             <button id="btnSave" class="small">
@@ -150,9 +192,13 @@
 
             <button id="btnVersion" class="version small building"
             title="Click me for the Changelog!">
-                0.0.2
+                0.0.3
             </button>
         </div>
+        <!--div class="top sideright">
+            <p>100 ticks = 1 sec in game.</p>
+            <p>1 tick = 1 frame.</p>
+        </div-->
 
 
 
@@ -166,7 +212,12 @@
 
 
 
-
+        <div class="sizemin">
+            <strong>
+        <p>If you're seeing this, it seems like your screen width may be too small...</p>
+        <p>Try Switching to Landscape mode to experience the game better.</p>
+            </strong>
+        </div>
 
 
 

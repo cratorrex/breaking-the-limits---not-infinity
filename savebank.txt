@@ -1,0 +1,4 @@
+Pre Upgrades (0.0.3)
+    {"version":"0.0.1","frameCount":4749119,"frameSaveCount":13,"pointScore":1697,"limitScoreTotal":5268,"extendScoreTotal":0,"limits":{"Score":1697,"Gain":1,"scoreThis":0},"structures":[7,7,4,4,3,0],"upgradesSL1":[0,0,0,0,0],"upgradesQL1":[0,0,0,0,0],"options":{"tabIndex":[0,0,0,0],"monospace":true,"sidestats":false},"upgradesL1":[0,0,0,0,0]}
+
+
