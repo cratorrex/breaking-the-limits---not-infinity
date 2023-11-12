@@ -141,6 +141,7 @@ for (let i = 0; i < game.structures.length-1; i++) {
         if (game.limits.Score >= Cost) {
             game.limits.Score -= Cost;
             game.structures[i] += 1;
+            game.totalStructures[i] += 1;
         }
     });
 }

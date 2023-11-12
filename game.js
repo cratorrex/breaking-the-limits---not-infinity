@@ -20,7 +20,8 @@ export class Game {
             Gain: 1,
         };
 
-        this.structures = [0,0,0,0,0,0];
+        this.structures =      [0,0,0,0,0,0];
+        this.totalStructures = [0,0,0,0,0,0];
 
         this.upgradesSL1 = [0,0,0,0,0]; //Structures in Limits
         this.upgradesQL1 = [0,0,0,0,0]; //Meta Upgrades in Limits (Q,Q,L,L,L)
@@ -75,6 +76,9 @@ export class Game {
             }
             if(savedGame.limits.scoreThis == null){ //fix "Limits this Extend"
                 savedGame.limits.scoreThis = savedGame.limitScoreTotal;
+            }
+            if(savedGame.totalStructures == null){
+                savedGame.totalStructures = savedGame.structures;
             }
 
         }
