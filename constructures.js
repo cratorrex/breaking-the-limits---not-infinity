@@ -1,4 +1,5 @@
 let generation = [0,0,0,0,0,0];
+let perGen     = [0,0,0,0,0,0];
 let structCost = [0,0,0,0,0,0];
 let structOwn  = [0,0,0,0,0,0];
 
@@ -14,15 +15,23 @@ export function structuresCost(index){
 
 export function structuresGen(own) {
   let value = 0;
+  let mult  =  upgEffectLimits[2] * Math.max(1,upgEffectLimits[3]);
+
   structOwn = own;
-  generation[0] = (own[0] ) * (1   + upgEffectStruct[0]);
-  generation[1] = (own[1] ) * (5   + upgEffectStruct[1]); 
-  generation[2] = (own[2] ) * (25  + upgEffectStruct[2]);
-  generation[3] = (own[3] ) * (125 + upgEffectStruct[3]);
-  generation[4] = (own[4] ) * (750 * upgEffectStruct[4]);
+
+  perGen[0] = (1   + upgEffectStruct[0]);
+  perGen[1] = (5   + upgEffectStruct[1]);
+  perGen[2] = (25  + upgEffectStruct[2]);
+  perGen[3] = (125 + upgEffectStruct[3]);
+  perGen[4] = (750 * upgEffectStruct[4]);
+
+  generation[0] = (own[0] ) * perGen[0];
+  generation[1] = (own[1] ) * perGen[1]; 
+  generation[2] = (own[2] ) * perGen[2];
+  generation[3] = (own[3] ) * perGen[3];
+  generation[4] = (own[4] ) * perGen[4];
 //value += Owned  * Base * Upgrades >>...
-  value = generation.reduce((a, b) => a + b, 0) * upgEffectLimits[2] *
-          Math.max(1,upgEffectLimits[3]) + 1;
+  value = generation.reduce((a, b) => a + b, 0) * mult + 1;
 
   return value;
 }
@@ -43,6 +52,10 @@ export function structuresDisplay(own, mode){
     case "gen":
       return generation
       break;
+
+    case "pergen":
+        return perGen
+        break;
     
     case "own":
       return own;
@@ -76,7 +89,7 @@ export function upgradesStructs(levels){
 export function upgradesLimits(levels){ //Uses QL1[]
   //Cost
   
-  upgCostLimits[0] = 5 * (levels[0] + 2) ** 2
+  upgCostLimits[0] = 5 * (levels[0] + 2) ** 3
   upgCostLimits[1] = 10 ** (2 + levels[1])
 
   upgCostLimits[2] = 40 + Math.floor(8**(levels[2]) - 1)  

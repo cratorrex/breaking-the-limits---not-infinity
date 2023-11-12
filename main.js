@@ -162,7 +162,7 @@ for (let i = 0; i < game.upgradesSL1.length; i++) {
             Displays.LimitUpgradesDescription);    
         
         if(game.upgradesSL1[i] < 5){
-            Displays.LimitUpgradesCost.text(CostNEffect[0] + " Structure " + (i+1));
+            Displays.LimitUpgradesCost.text(CostNEffect[0] + " S" + (i+1));
         }
         else{//if (that upgrade's level is 5)
             Displays.LimitUpgradesCost.text("Maximum");
@@ -272,12 +272,12 @@ for (let i = 0; i < game.upgradesQL1.length; i++){
         })
 
         Buttons.UpgradesLimits[i].click(function(){
-            let Cost = Constructs.upgradesDisplay("QL1 C", i);
-            if (game.limits.Score >= Cost && game.upgradesQL1[i] < 5){
-                game.limits.Score -= Cost;
+            let Cost = Constructs.upgradesDisplay("QL1 CE", i);
+            if (game.limits.Score >= Cost[0] && game.upgradesQL1[i] < 5){
+                game.limits.Score -= Cost[0];
                 game.upgradesQL1[i] += 1;
             }
-            game.limits.Gain = game.upgradesQL1[4] + 1;
+            game.limits.Gain = Cost[1];
         });
 
 
@@ -351,21 +351,13 @@ for (let i = 0; i < game.upgradesQL1.length; i++){
 
 
 //Saving
-        Buttons.Save.click(function() {
-            game.saveGame();
-        });
-    
-        Buttons.Load.click(function() {
-            game.loadGame();
-        });
-    
-        Buttons.Export.click(function() {
-            game.exportGame();
-        });
-    
-        Buttons.Import.click(function() {
-            game.importGame();
-        });
+        Buttons.Save.click(function() { game.saveGame(); });
+
+        Buttons.Load.click(function() { game.loadGame(); });
+
+        Buttons.Export.click(function() { game.exportGame(); });
+
+        Buttons.Import.click(function() { game.importGame(); });
     
     
 
@@ -385,6 +377,9 @@ function simClick(){
             game.limitScoreTotal += game.limits.Gain;
             game.pointScore = 0;
         }
+}
+function holdClick(){
+    if (game.frameCount % 10 == 0){ simClick(); }
 }
 
 
@@ -419,7 +414,7 @@ function updateGeneration(game){
 function updateConditions(game){
     let points = game.pointScore;
     let limits = game.limitScoreTotal;
-    let gen    = game.structures;
+    let gen    = game.totalStructures;
 
     condenseConditions(false, true, Buttons.Extend);
     condenseConditions(false, true, Displays.BarExtend);
@@ -443,7 +438,7 @@ function updateConditions(game){
     condenseConditions(gen[3], 0, Buttons.UpgradesStructures[3]);
     condenseConditions(gen[4], 0, Buttons.UpgradesStructures[4]);
         //QL1
-    condenseConditions(game.frameCount, 1e5, Buttons.UpgradesLimits[0]);
+    condenseConditions(game.frameCount, 1e4, Buttons.UpgradesLimits[0]);
     condenseConditions(game.upgradesQL1[2], 0, Buttons.UpgradesLimits[1]);
     condenseConditions(gen[1], 0, Buttons.UpgradesLimits[2]);
     condenseConditions(limits, 120, Buttons.UpgradesLimits[3]);
@@ -570,10 +565,10 @@ function updateData(Displays, game){ //(Displays, game)
             simClick();
             //console.log("hover")
     }
-    if(game.upgradesQL1[1] >= 1){
+    if(game.upgradesQL1[1] >= 1 && game.frameCount % 10 == 0){
         //if "W" keydown
             //simClick();
-        Mousetrap.bind('w', simClick);
+        Mousetrap.bind('w', holdClick);
     }
 
 

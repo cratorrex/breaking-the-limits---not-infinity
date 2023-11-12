@@ -12,13 +12,14 @@ export class Texts{
         case 0:
 dispTitle.text("MQ1: Cursor")
 dispDesc.html("<p>Buy a cursor that helps you to click the Gain Limits button, " +
-"every few game frames.</p><p>Effect Formula: <strong>500 / Level</strong> frames.")
+"every few game frames.</p><p>Effect Formula: <strong>200 / Level</strong> frames.")
         break;
 
         case 1:
 dispTitle.text("MQ2: Gift Box")
 dispDesc.html("<p>Unlocks some stuff to help progression.</p><p>Level 1: " +
-"Unlocks the ability to click the Gain Limits button on pressing \"W\".</p>")
+"Unlocks the ability to click the Gain Limits button every few frames, " + 
+"while holding \"W\".</p>")
         break;
 
         case 2:
@@ -37,7 +38,8 @@ dispDesc.html("<p>Structures function better when clumped up together.</p>" +
 
         case 4:
 dispTitle.text("LL3: Break the Limits a bit more...")
-dispDesc.html("<br/><p><strong>Gain more Limits per Limit Break.</strong><p>")
+dispDesc.html("<p>Gain more Limits every time you gain Limits." +
+"</p><p><strong>(1 + Level) ^ 2</strong></p>")        
         break;
 
         default:
