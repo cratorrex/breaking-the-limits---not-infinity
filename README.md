@@ -1,4 +1,4 @@
-# Breaking the Limits
+# Breaking the Limits [`Play`](https://cratorrex.github.io/breaking-the-limits---not-infinity/)
 An Incremental game about Gaining Points, Limits and more!
 > Start with Gaining your first Limit, and gain 1 point per second.
 
