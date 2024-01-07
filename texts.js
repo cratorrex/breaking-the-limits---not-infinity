@@ -117,27 +117,38 @@ dispDesc.html(id);
 "<p>This update seems rushed, but next update is Upgrades!</p></div><hr/>";
 
         let changelog003 =
-"<hr/><div class=\"changelog\"><p><strong>Version 0.0.3</strong> Upgrades.</p>" +
-"<p title=\"You do not want to know how hard it was to get the actual " +
-"frameworks done... But thanks, Alvar and Rak.\"><strong></strong>" +
-"Added 10 Upgrades. 5 for Structures, 2 Quality of Life, 3 Limit Layer.</p>" +
-"<p>Sub tabs now exist. Thanks UI problems.</p>" + 
-"<p>Adjusted Structure names, and Limit Breaker's cost. (now it costs " +
-"~3x less points).</p><p>Made <strong>Progress Bar %</strong> " +
-"and many other things toFixed(2).</p>" +
-"<p title=\"hover\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover" +
-"\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover" + 
-"\nhover\">UQ1 was buffed for unexpected reasons, but thank the code that " +
-"you didn't have to see <strong>that</strong> in this version.</p>" +
-"<p>Responsive design, ignore the todo.</p>" +
-"<p>Savefile upgrades with every version from now on, it may seem...</p></div><hr/>";
+`<hr/><div class=\"changelog\"><p><strong>Version 0.0.3</strong> Upgrades.</p>
+<p title=\"You do not want to know how hard it was to get the actual 
+frameworks done... But thanks, Alvar and Rak.\"><strong>i</strong>
+Added 10 Upgrades. 5 for Structures, 2 Quality of Life, 3 Limit Layer.</p>
+<p>Sub tabs now exist. Thanks UI problems.</p>
+<p>Adjusted Structure names, and Limit Breaker's cost. (now it costs 
+~3x less points).</p><p>Made <strong>Progress Bar %</strong> 
+and many other things toFixed(2).</p>
+<p title=\"hover\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover
+hover\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover\nhover
+hover\">UQ1 was buffed for unexpected reasons, but thank the code that 
+you didn't have to see <strong>that</strong> in this version.</p>
+<p>Responsive design, ignore the todo.</p>
+<p>Savefile upgrades with every version from now on, it may seem...</p></div><hr/>`;
+
+    let changelog004 = 
+`<hr/><div class="changelog"><p><strong>Version 0.0.4</strong> Fixes.</p>
+<p>Added Stats Overlay and is enabled in Settings.</p>
+<p>Added a favicon :D</p>
+<p>Preparations for Extend Layer...</p>
+<p>Fixed MQ1 not firing on decimals (floor), and everything else that was wrong with it.</p>
+<p title="I had to forcefully handle this..."><strong>i</strong>
+Fixed LL3 not showing and reflecting the correct values.</p>
+<p title="sideright... :rolling_eyes:">Many more fixes...</p>
+</div><hr/>`;
 
 
 
 
 
 
-display.html(changelog003 + changelog002 + changelog001);
+display.html(changelog004 + changelog003 + changelog002 + changelog001);
 
     }
 }

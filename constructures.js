@@ -105,7 +105,7 @@ export function upgradesLimits(levels){ //Uses QL1[]
     //Costs Points (like a milestone)
 
   
-  upgEffectLimits[0] = 500/levels[0]
+  upgEffectLimits[0] = Math.floor(500/levels[0])
 
     //MQ2
     //Level 1: Allows for a keybind to press Gain Limits each frame when held down
@@ -144,4 +144,40 @@ export function upgradesDisplay(mode, id){
     case "QL1 C":
       return upgCostLimits[id];
   }
+}
+
+export function updateStats(game, mode){//nesting this function here cus idk why
+    //let gameData = JSON.stringify(game,"\"",4);
+    game.limits.Gain = upgEffectLimits[4] //had to do it like this somehow it works... it will haunt me when i get back to it i am sure of that.
+    let LimitGain = Math.floor(game.limits.Gain + structuresGen(game.structures)/game.limits.Score)
+    let genMult = upgEffectLimits[2]*upgEffectLimits[3]
+    let gameD = Math.floor(game.frameCount/5184000),
+    gameH = Math.floor((game.frameCount-gameD*5184000)/216000), 
+    gameM = Math.floor((game.frameCount-gameD*5184000-gameH*216000)/3600),
+    gameS = Math.floor((game.frameCount-gameD*5184000-gameH*216000-gameM*3600)/60);
+    
+    let gameData = `Statistics:
+                \n\nSave Frame Count: ${game.frameSaveCount} | Frame Count: ${game.frameCount} (${gameD}D ${gameH}H ${gameM}M ${gameS}S)
+                \nTotal Scores: ${game.pointScore} / ${game.limitScoreTotal} / ${game.extendScoreTotal}
+                \n\nLimits Layer:
+                \n\tLimits this Extend (now/this): ${game.limits.Score} / ${game.limits.scoreThis}
+                \n\tLimits gained per Break: ${game.limits.Gain}
+                \n\tLimits gained with MQ1:  ${LimitGain}
+                \n
+                \n\tStructures Owned:        ${game.structures}
+                \n\tStructures Generation:   ${generation}
+                \n\tStructures Per Gen:      ${perGen}
+                \n\tStructures Cost:         ${structCost}
+                \n\tStructures Gen Gain Add: ${upgEffectStruct} 
+                \n\tGeneration Multiplier:   ${genMult} 
+                \n\t{${upgEffectLimits[2]} * ${upgEffectLimits[3]}}
+                \n  
+                \n\tUpgrades Level Structs:  ${game.upgradesSL1}
+                \n\tUpgrades Cost Structs:   ${upgCostStruct}
+                
+                \n\tUpgrades Level Limits:   ${game.upgradesQL1}
+                \n\tUpgrades Cost Limits:    ${upgCostLimits}
+                \n\tUpgrades Effect Limits:  ${upgEffectLimits}`
+                
+    return gameData
 }

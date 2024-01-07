@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="styles.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <title>Breaking The Limits (Alpha)</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
     </head>
     <body id="body">
 
@@ -67,7 +68,6 @@
                         <div class="horizontal">
                             <button title="Hover: Limits/s" id="productionPoint" 
                             class="center horizontal"></button>
-                            <!--button>Upgrades: <b id="productionPointMult"></b></button-->
                         </div>
                     </p>
                     <div class="horizontal">   
@@ -164,6 +164,10 @@
             <div id="tabOptions">
                 <button id="monospace">Toggle Monospace Font</button>
                 <button id="sidestats">Toggle Stats Overlay</button>
+                <p id="statsController" class="container">Statsistics Controller
+                        <button id="statsAll" class="small">All</button>
+                        <button id="statsPointMult" class="small">P*</button>
+                </p>
                 <div class="container">
                     <p><strong>Keybinds</strong></p>
                     <p><strong>W</strong> Gain Limits (MQ2-1 needed.)</p>
@@ -177,9 +181,13 @@
 
         </div>
 
-            <div id="statistics" class="sideright">
-                Hello! If you see me like this on your screen for too long, that means some thing wrong happened...
-            </div>
+            <div id="statistics" class="sideright"><pre id="stattext">
+                <br/>Hello! 
+                <br/>If you see me like this on your screen for too long,
+                <br>that means some thing wrong happened 
+                <br/>while loading your save...
+                <br/>Try Refreshing the page, maybe that would help?
+            </pre></div>
 
         <div class="horizontal bottom"> <!--Bottom Navigations... Saving and Changelogs-->
             <button id="btnSave" class="small">
@@ -202,9 +210,11 @@
             title="Click me for the Changelog!">
                 0.0.3
             </button>
+
+            
         </div>
         <!--div class="top sideright">
-            <p>100 ticks = 1 sec in game.</p>
+            <p>60 ticks = 1 sec in game.</p>
             <p>1 tick = 1 frame.</p>
         </div-->
 

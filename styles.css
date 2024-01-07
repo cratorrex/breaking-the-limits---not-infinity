@@ -94,15 +94,20 @@ div.container{
 }
 .sideright{
     position: fixed;
+    flex: content;
+    top: 0px;
+    left: auto;
     right: 0px;
-    width: 30%;
-    float: right;
+    height:60%;
+    width: auto;
     opacity: 0.7;
     background-color: #1e1e1e;
     border-left: 5px solid #004aaa;
     border-radius: 20px;
 
-    padding: 20px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    padding: 5%;
 }
 .bottom{
     background-color: #101530;

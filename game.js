@@ -1,6 +1,6 @@
 export class Game {
     constructor() {
-        this.version = "0.0.3";
+        this.version = "0.0.4";
 
         //this.gameFrame = 0;
         this.frameCount = 0;
@@ -10,7 +10,7 @@ export class Game {
         this.pointScore = 0;
         this.limitScoreTotal = 0;
         this.extendScoreTotal = 0;
-
+        this.overflowScoreTotal = 0;
 
 
         this.limits = 
@@ -19,6 +19,12 @@ export class Game {
             scoreThis: 0,
             Gain: 1,
         };
+
+        this.extend =
+        {
+            Score: 0,
+            scoreThis: 0,
+        }
 
         this.structures =      [0,0,0,0,0,0];
         this.totalStructures = [0,0,0,0,0,0];
@@ -35,7 +41,7 @@ export class Game {
         {
             tabIndex: [0,0,0,0],
             monospace: false,
-            sidestats: false,
+            sidestats: [false,0],
         };
 
     }
@@ -71,7 +77,7 @@ export class Game {
             if(savedGame.options.tabIndex.length !== 4){ //tabIndex fix
                 savedGame.options.tabIndex = this.options.tabIndex;
             }
-            if(savedGame.options.sidestats == null){
+            if(savedGame.options.sidestats == null || savedGame.options.sidestats.length !== 2){
                 savedGame.options.sidestats = this.options.sidestats;
             }
             if(savedGame.limits.scoreThis == null){ //fix "Limits this Extend"
